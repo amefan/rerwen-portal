@@ -27,13 +27,18 @@ export default {
   ** Global CSS
   */
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    'quill/dist/quill.snow.css',
+    'quill/dist/quill.bubble.css',
+    'quill/dist/quill.core.css'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~plugins/vue-infinite-scroll', ssr: false },
+    { src: '~plugins/nuxt-quill-plugin.js', ssr: false },
     '@/plugins/element-ui'
   ],
 

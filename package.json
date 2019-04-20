@@ -14,7 +14,11 @@
     "axios": "^0.18.0",
     "cross-env": "^5.2.0",
     "element-ui": "^2.4.11",
-    "nuxt": "^2.4.0"
+    "js-cookie": "^2.2.0",
+    "nuxt": "^2.4.0",
+    "vue-infinite-scroll": "^2.0.2",
+    "vue-quill-editor": "^3.0.6",
+    "vue-quill-editor-upload": "^1.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
