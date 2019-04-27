@@ -24,6 +24,23 @@ export default {
                 password: password
             }
         })
+    },
+    toSelf(token){
+        return request({
+            url: `${host}/${api_name}/toself`,
+            method: 'post',
+            data: {
+                token
+            }
+        })
+    },
+    save(pojo,id){
+        return request({
+            url: `${host}/${api_name}/${id}`,
+            method: 'put',
+            data: pojo
+        })
+        
     }
 
 }

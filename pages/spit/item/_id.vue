@@ -46,7 +46,7 @@
     <div class="fl right-tag"> 
      <div class="block-btn"> 
       <p>来个匿名吐槽，发泄一下你心中的怒火吧！</p> 
-      <a class="sui-btn btn-block btn-share" href="~/assets/spit-submit.html" target="_blank">发吐槽</a> 
+      <router-link class="sui-btn btn-block btn-share" to="/spit/submit">发吐槽</router-link>   
      </div> 
     </div> 
     <div class="clearfix"></div> 

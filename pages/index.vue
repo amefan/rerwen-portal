@@ -1,7 +1,7 @@
 <template>
 <div class="sui-container wrapper">
 <div class="sj-content"> 
-    <div class="left-nav"> 
+    <!-- <div class="left-nav"> 
      <div class="float-nav" id="float-nav"> 
       <ul class="sui-nav nav-tabs nav-xlarge tab-navbar tab-vertical"> 
        <li class="active"><a>热门</a></li> 
@@ -14,247 +14,112 @@
        <li><a href="#">前端开发</a></li> 
       </ul> 
      </div> 
-    </div> 
+    </div>  -->
     <div class="right-content"> 
-     <div class="fl middle"> 
+     <div class="fl middle" style="margin-left: -100px;width: 710px;"> 
       <div class="carousel"> 
-       <div id="myCarousel" data-ride="carousel" data-interval="4000" class="sui-carousel slide"> 
-        <ol class="carousel-indicators"> 
-         <li data-target="#myCarousel" data-slide-to="0" class="active"></li> 
-         <li data-target="#myCarousel" data-slide-to="1"></li> 
-         <li data-target="#myCarousel" data-slide-to="2"></li> 
-        </ol> 
-        <div class="carousel-inner"> 
-         <div class="active item"> 
-          <img src="~/assets/img/widget-banner01.png" /> 
-         </div> 
-         <div class="item"> 
-          <img src="~/assets/img/widget-banner02.png" /> 
-         </div> 
-         <div class="item"> 
-          <img src="~/assets/img/widget-banner01.png" /> 
-         </div> 
-        </div> 
-       </div> 
+       <el-carousel trigger="click" height="150px">
+      <el-carousel-item v-for="item in 4" :key="item">
+        <h3>{{ item }}</h3>
+      </el-carousel-item>
+    </el-carousel>
       </div> 
       <div class="data-list"> 
        <ul class="headline fixed" id="headline"> 
-        <li class="headline-item"> 
+        <li class="headline-item" v-for="(item,index) in sharelist" :key="index"> 
          <div class="fl indexImg"> 
           <img src="" /> 
          </div> 
          <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="" class="vip" /></span></h3> 
           <h5 class="author"> 
            <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月22日 12:01</span> 
+            <span class="authorName" style="font-size: 17px"> <img :src="item.avater" style="width:45px; height:45px;" alt="" /> <span>{{item.username}}</span> </span> 
+            <span>{{item.publishtime}}</span> 
            </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
+         
            <div class="clearfix"></div> </h5> 
-         </div> <p class="content">滴滴与360都开源了各自的插件化框架，VirtualAPK与RePlugin,作为一个插件化方面的狂热研究者，在周末就迫不及待的下载了Virtualapk框架来进行研究，本篇博客带的……</p> </li> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="~/assets/img/widget-vip.png" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月12日 13：34</span> 
+         </div> <p class="content">{{item.content}}</p> 
+         
+         <div class="wrapper activities" style="width: 685px">
+               <div class="activity-card-list">
+                 <div class="activity-list" > 
+               <ul class="activity" style="width: 710px"> 
+               <li class="activity-item" style="width:210px" v-for="(img,index1) in item.imgs" :key="index1">
+                  <img :src="img" alt="" />
+               </li>
+               
+               </ul>
+               </div>
+
+               </div>
+               
+         </div>
+        
+         <div class="item_footer" >
+            <div class="fr remark">
+             <a href="#" data-toggle="modal" data-target="#shareModal" class="share" style="color:#a5a6a5">  <i :class="'fa fa-thumbs-o-up '" aria-hidden="true"></i>点赞数:60</a>
+            <a href="#" data-toggle="modal" data-target="#shareModal" class="share" style="color:#a5a6a5"><i class="fa fa-eye" aria-hidden="true"></i> 浏览数:50</a> 
+            <a href="#" data-toggle="modal" data-target="#remarkModal" class="comment" style="color:#a5a6a5"><i class="fa fa-commenting" aria-hidden="true"></i> 评论数:50</a> 
            </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content">滴滴与360都开源了各自的插件化框架，VirtualAPK与RePlugin,作为一个插件化方面的狂热研究者，在周末就迫不及待的下载了Virtualapk框架来进行研究，本篇博客带的……</p> </li> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="~/assets/img/widget-list01.png" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="~/assets/img/widget-vip.png" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月12日 13：34</span> 
-           </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content"></p> </li> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="~/assets/img/widget-vip.png" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月7日 10：34</span> 
-           </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content">滴滴与360都开源了各自的插件化框架，VirtualAPK与RePlugin,作为一个插件化方面的狂热研究者，在周末就迫不及待的下载了Virtualapk框架来进行研究，本篇博客带的……</p> </li> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="~/assets/img/widget-list02.png" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="~/assets/img/widget-vip.png" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月12日 13：34</span> 
-           </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content"></p> </li> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="~/assets/img/widget-vip.png" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月7日 10：34</span> 
-           </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content">滴滴与360都开源了各自的插件化框架，VirtualAPK与RePlugin,作为一个插件化方面的狂热研究者，在周末就迫不及待的下载了Virtualapk框架来进行研究，本篇博客带的……</p> </li> 
-       </ul> 
-       <div class="stop"> 
-        <a href="javascript:;">32分钟前看到这里，点击刷新 <i class="fa fa-refresh" aria-hidden="true"></i></a> 
-       </div> 
-       <ul id="data-list-down" class="headline loading"> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月22日 12:01</span> 
-           </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content">滴滴与360都开源了各自的插件化框架，VirtualAPK与RePlugin,作为一个插件化方面的狂热研究者，在周末就迫不及待的下载了Virtualapk框架来进行研究，本篇博客带的……</p> </li> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="~/assets/img/widget-vip.png" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月12日 13：34</span> 
-           </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content">滴滴与360都开源了各自的插件化框架，VirtualAPK与RePlugin,作为一个插件化方面的狂热研究者，在周末就迫不及待的下载了Virtualapk框架来进行研究，本篇博客带的……</p> </li> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="~/assets/img/widget-list01.png" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="~/assets/img/widget-vip.png" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月12日 13：34</span> 
-           </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content"></p> </li> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="~/assets/img/widget-vip.png" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月7日 10：34</span> 
-           </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content">滴滴与360都开源了各自的插件化框架，VirtualAPK与RePlugin,作为一个插件化方面的狂热研究者，在周末就迫不及待的下载了Virtualapk框架来进行研究，本篇博客带的……</p> </li> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="~/assets/img/widget-list02.png" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="~/assets/img/widget-vip.png" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月12日 13：34</span> 
-           </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content"></p> </li> 
-        <li class="headline-item"> 
-         <div class="fl indexImg"> 
-          <img src="" /> 
-         </div> 
-         <div class="words"> 
-          <h3>Drive.ai融资5000万吴恩达加入董事会 <span><img src="~/assets/img/widget-vip.png" class="vip" /></span></h3> 
-          <h5 class="author"> 
-           <div class="fl"> 
-            <span class="authorName"> <img src="~/assets/img/widget-photo.png" alt="" /> 玻璃通 </span> 
-            <span>6月7日 10：34</span> 
-           </div> 
-           <div class="fr attention"> 
-            <span class="attentionText">关注</span> 
-            <span class="beforeclose"> <i class="fa fa-times delete" aria-hidden="true"></i> <i class="nolike">不感兴趣</i> </span> 
-           </div> 
-           <div class="clearfix"></div> </h5> 
-         </div> <p class="content">滴滴与360都开源了各自的插件化框架，VirtualAPK与RePlugin,作为一个插件化方面的狂热研究者，在周末就迫不及待的下载了Virtualapk框架来进行研究，本篇博客带的……</p> </li> 
-       </ul> 
-       <ul id="loaded" class="headline"> 
-       </ul> 
+         </div>
+         <hr>
+         <div class="">
+               <el-input v-model="comment.content" placeholder="请输入你的评论" style="margin-bottom: 10px;"></el-input>
+                    <br>
+         <div style="color:#ff8140">
+             <el-button size="small" @click="handlecomment(index,0)" style="margin-left: 600px;" type="warning">评论</el-button>
+         </div>
+        </div>
+ <hr>
+<div class="answer-intro">
+       
+        <div class="remark-list">
+            <ul class="lists">
+                <li class="item" v-for="(item1,index1) in item.comments" :key="index1">
+                    <div class="fl img">
+                        <img :src="item1.avatar" alt="" style="width:40px; height:40px; border-radius:50%; ">
+                         
+                    </div>
+                    <div class="fl text" style="margin-left: 20px;margin-top: 6px;">
+                       <p class="author"><span class="name" style="color:#2d64b3">{{item1.nickname}}:</span> {{item1.publishdate}}</p>
+                        <p class="word">{{item1.content}}</p>
+                      
+                    </div>
+                    <div style="clear:both"></div>
+                   
+                      <ul class="inner-list" style="margin-left: 80px;">
+                        <li class="item" v-for="(item2,index2) in item1.childcomment" :key="index2">
+                            <div class="fl text">
+                                <p class="author"><span class="name">{{item2.nickname}}:</span> 回复</p>
+                                <p class="word">{{item2.content}}</p>
+                                <p class="tool"><a  class="callback" @click="handleback(index,index1)">回复</a>&nbsp;</p>
+                            </div>
+                            <div style="clear:both"></div>
+                           
+                        </li>
+                       
+                      </ul>
+                      <p class="tool" style="float: right;"><a class="callback" @click="handleback(index,index1)">回复</a>&nbsp;</p>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+  </li> 
+ </ul> 
+        
+      
+      
       </div> 
       <!-- <script src="~/assets/data-list.js" type="text/javascript"></script> --> 
      </div> 
      <div class="fl right"> 
+      
+      <div class="block-btn"> 
+       <p>今天，有什么好东西要和大家分享么?</p> 
+       <span class="sui-btn btn-block btn-share" @click="showForm" target="_blank">发布分享</span> 
+      </div> 
+     
       <div class="activity"> 
        <div class="acti">
         <img src="~/assets/img/widget-activity01.png" alt="活动一" />
@@ -263,164 +128,209 @@
         <img src="~/assets/img/widget-activity02.png" alt="活动一" />
        </div> 
       </div> 
-      <div class="block-btn"> 
-       <p>今天，有什么好东西要和大家分享么?</p> 
-       <a class="sui-btn btn-block btn-share" href="~/assets/headline-submit.html" target="_blank">发布分享</a> 
-      </div> 
-      <div class="question-list"> 
-       <h3 class="title">热门回答</h3> 
-       <div class="lists"> 
-        <ul> 
-         <li class="list-item"> <p class="list-title">关于系统问答你都应该都应该都应该注意些什么吗？</p> <p class="authorInfo"> <span class="authorName"><img src="~/assets/img/widget-photo.png" alt="" />玻璃筒</span> <span>6月22日 12:01</span> </p> </li> 
-         <li class="list-item"> <p class="list-title">关于系统问答你都应该注意吗？</p> <p class="authorInfo"> <span class="authorName"><img src="~/assets/img/widget-photo.png" alt="" />玻璃筒</span> <span>6月22日 12:01</span> </p> </li> 
-         <li class="list-item"> <p class="list-title">关于系统问答你都应该注意吗？</p> <p class="authorInfo"> <span class="authorName"><img src="~/assets/img/widget-photo.png" alt="" />玻璃筒</span> <span>6月22日 12:01</span> </p> </li> 
-         <li class="list-item"> <p class="list-title">关于系统问答你都应该注意吗？</p> <p class="authorInfo"> <span class="authorName"><img src="~/assets/img/widget-photo.png" alt="" />玻璃筒</span> <span>6月22日 12:01</span> </p> </li> 
-         <li class="list-item"> <p class="list-title">关于系统问答你都应该注意吗？</p> <p class="authorInfo"> <span class="authorName"><img src="~/assets/img/widget-photo.png" alt="" />玻璃筒</span> <span>6月22日 12:01</span> </p> </li> 
-        </ul> 
-        <a class="sui-btn btn-block btn-bordered btn-more">查看更多</a> 
-       </div> 
-      </div> 
-      <div class="card-list"> 
-       <div class="head"> 
-        <h3 class="title">遇见TA</h3> 
-       </div> 
-       <div class="list"> 
-        <ul> 
-         <li class="card-item"> 
-          <div class="attention"> 
-           <span>关注匹配度：<i class="degree">83%</i></span> 
-           <span class="fr"><i class="fa fa-heart-o" aria-hidden="true"></i><i class="fa fa-times close" aria-hidden="true"></i></span> 
-          </div> 
-          <div class="img"> 
-           <img src="~/assets/img/widget-t01be3f1015cf52e1f3.png" alt="" /> 
-          </div> 
-          <div class="info"> 
-           <div class="fl photo">
-            <img src="~/assets/img/widget-photo.png" alt="" />
-           </div> 
-           <div class="fl intro"> 
-            <p>【馨儿】发布了雕刻时光约会邀请</p> 
-            <p class="name">玻璃通 <span class="date">6月22日 12:01</span></p> 
-           </div> 
-           <div class="clearfix"></div> 
-          </div> </li> 
-         <li class="card-item"> 
-          <div class="attention"> 
-           <span>关注匹配度：<i class="degree">86%</i></span> 
-           <span class="fr"><i class="fa fa-heart-o" aria-hidden="true"></i><i class="fa fa-times close" aria-hidden="true"></i></span> 
-          </div> 
-          <div class="img"> 
-           <img src="~/assets/img/widget-MOG88A60E7ZI.png" alt="" /> 
-          </div> 
-          <div class="info"> 
-           <div class="fl photo">
-            <img src="~/assets/img/widget-photo.png" alt="" />
-           </div> 
-           <div class="fl intro"> 
-            <p>【馨儿】发布了雕刻时光约会邀请</p> 
-            <p class="name">玻璃通 <span class="date">6月22日 12:01</span></p> 
-           </div> 
-           <div class="clearfix"></div> 
-          </div> </li> 
-         <li class="card-item"> 
-          <div class="attention"> 
-           <span>关注匹配度：<i class="degree">78%</i></span> 
-           <span class="fr"><i class="fa fa-heart-o" aria-hidden="true"></i><i class="fa fa-times close" aria-hidden="true"></i></span> 
-          </div> 
-          <div class="img"> 
-           <img src="~/assets/img/widget-t019e2d84e53580b099.png" alt="" /> 
-          </div> 
-          <div class="info"> 
-           <div class="fl photo">
-            <img src="~/assets/img/widget-photo.png" alt="" />
-           </div> 
-           <div class="fl intro"> 
-            <p>【馨儿】发布了雕刻时光约会邀请</p> 
-            <p class="name">玻璃通 <span class="date">6月22日 12:01</span></p> 
-           </div> 
-           <div class="clearfix"></div> 
-          </div> </li> 
-        </ul> 
-        <a class="sui-btn btn-block btn-bordered btn-more">查看更多</a> 
-       </div> 
-      </div> 
-      <div class="activity-list"> 
-       <h3 class="title">活动日历</h3> 
-       <div class="list"> 
-        <ul> 
-         <li class="list-item"> <p class="list-time"> 2017/06/30 北京</p> 
-          <div class="list-content clearfix"> 
-           <div class="fl img"> 
-            <img src="~/assets/img/widget-simple.png" alt="" /> 
-           </div> 
-           <div> 
-            <p>在线峰会 | 前端开发重难点技术剖析与创新实践</p> 
-           </div> 
-          </div> </li> 
-         <li class="list-item"> <p class="list-time"> 2017/06/30 北京</p> 
-          <div class="list-content clearfix"> 
-           <div class="fl img"> 
-            <img src="~/assets/img/widget-simple.png" alt="" /> 
-           </div> 
-           <div> 
-            <p>在线峰会 | 前端开发重难点技术剖析与创新实践</p> 
-           </div> 
-          </div> </li> 
-         <li class="list-item"> <p class="list-time"> 2017/06/30 北京</p> 
-          <div class="list-content clearfix"> 
-           <div class="fl img"> 
-            <img src="~/assets/img/widget-simple.png" alt="" /> 
-           </div> 
-           <div> 
-            <p>在线峰会 | 前端开发重难点技术剖析与创新实践</p> 
-           </div> 
-          </div> </li> 
-         <li class="list-item"> <p class="list-time"> 2017/06/30 北京</p> 
-          <div class="list-content clearfix"> 
-           <div class="fl img"> 
-            <img src="~/assets/img/widget-simple.png" alt="" /> 
-           </div> 
-           <div> 
-            <p>在线峰会 | 前端开发重难点技术剖析与创新实践</p> 
-           </div> 
-          </div> </li> 
-        </ul> 
-        <a class="sui-btn btn-block btn-bordered btn-more">查看更多</a> 
-       </div> 
-      </div> 
-      <div class="ad-carousel"> 
-       <div class="carousel"> 
-        <div id="myCarousel" data-ride="carousel" data-interval="4000" class="sui-carousel slide"> 
-         <ol class="carousel-indicators"> 
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li> 
-          <li data-target="#myCarousel" data-slide-to="1"></li> 
-          <li data-target="#myCarousel" data-slide-to="2"></li> 
-         </ol> 
-         <div class="carousel-inner"> 
-          <div class="active item"> 
-           <img src="~/assets/img/widget-ad01.png" /> 
-          </div> 
-          <div class="item"> 
-           <img src="~/assets/img/widget-ad01.png" /> 
-          </div> 
-          <div class="item"> 
-           <img src="~/assets/img/widget-ad01.png" /> 
-          </div> 
-         </div> 
-         <span class="adname">广告</span> 
-        </div> 
-       </div> 
-      </div> 
+    
       <!-- <link rel="import" href=".~/assets/.~/assets/modules/ui-modules/footer/footer.html?__inline"> --> 
      </div> 
     </div> 
    </div> 
+
+
+    <el-dialog title="编辑分享" :visible.sync="dialogFormVisible">
+  <el-form :model="pojo">
+    <el-form-item :label-width="formLabelWidth">
+     <el-input
+  type="textarea"
+  :rows="6"
+  placeholder="说点什么吧。。"
+  v-model="pojo.content">
+</el-input>
+    </el-form-item>
+    <el-form-item label="添加图片" :label-width="formLabelWidth">
+      <el-upload
+  action="http://localhost:9004/spit/uploadlogo"
+  list-type="picture-card"
+  :on-preview="handlePictureCardPreview"
+  :on-remove="handleRemove"
+  :on-success = "handleSuccess"
+  @limit="9">
+  <i class="el-icon-plus"></i>
+</el-upload>
+<el-dialog :visible.sync="dialogVisible">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
+    </el-form-item>
+  </el-form>
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="dialogFormVisible = false">取 消</el-button>
+    <el-button type="primary" @click="save">确 定</el-button>
+  </div>
+</el-dialog>
+
+ <el-dialog title="评论" :visible.sync="dialogCommVisible">
+  <el-form :model="comment">
+    <el-form-item :label-width="formLabelWidth">
+      <el-input placeholder="说点什么吧。。。" v-model="comment.content"></el-input>
+    </el-form-item>
+  </el-form>
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="dialogCommVisible = false">取 消</el-button>
+    <el-button type="primary" @click="handlecomment(1,1)">确 定</el-button>
+  </div>
+ </el-dialog>
 </div>
 </template>
 
 <script>
+import '~/assets/css/page-sj-spit-index.css'
 import '~/assets/css/page-sj-headline-login.css'
+import '~/assets/css/page-sj-confession.css'
+import '~/assets/css/page-sj-headline-detail.css'
+import shareApi from '@/api/share'
+import {getUser} from '@/utils/auth'
+import axios from 'axios'
+import commentApi from '@/api/articlecomment'
+import '~/assets/css/page-sj-headline-detail.css'
 export default{
-  
+  asyncData(){
+        return axios.all( [ shareApi.search(1,10,{})] ).then( 
+            axios.spread( function( sharelist){
+                 console.log(sharelist.data.data.rows)
+                return {
+                  
+                    sharelist: sharelist.data.data.rows
+                } 
+            })
+         )
+    },
+  data(){
+    return{
+      title: "人文校园",
+      dialogFormVisible: false,
+      pojo: {},
+      dialogImageUrl: '',
+      dialogVisible: false,
+      imgs: "",
+      page:1,
+      formLabelWidth: '',
+      comment: {},
+      dialogCommVisible: false,
+      parentid: '',
+      articleid: '',
+    }
+  },
+   methods: {
+     handleback(index,parentid){
+       if(getUser().name===undefined){
+                this.$message({
+                    message:'必须登陆才可以评论哦~',
+                    type:"warning"
+                })
+                return 
+        }
+       this.articleid = this.sharelist[index].id
+       this.parentid = this.sharelist[index].comments[parentid].id
+       this.dialogCommVisible = true
+
+     },
+     handlecomment(index,parentid){
+       if(getUser().name===undefined){
+                this.$message({
+                    message:'必须登陆才可以评论哦~',
+                    type:"warning"
+                })
+                return 
+        }
+        if(this.comment.content===''){
+          this.$message({
+                    message:'请填写评论内容哦~',
+                    type:"warning"
+                })
+                return 
+        }
+        this.comment.nickname=getUser().name
+        this.comment.avatar=getUser().avatar
+        this.comment.userid=getUser().token
+        this.comment.parentid = (parentid===0?'0':this.parentid)
+        this.comment.articleid = (index===1?this.articleid:this.sharelist[index].id)
+        commentApi.save(this.comment).then(res=>{
+           this.$message({
+                    message: res.data.message,
+                    type: (res.data.flag?'success':'error')
+                })
+        })
+        this.dialogCommVisible=false
+        console.log(this.sharelist[index])
+     },
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePictureCardPreview(file) {
+        console.log(file)
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+         console.log( this.dialogImageUrl)
+      },
+      handleSuccess(response, file, fileList){
+        this.imgs=''
+        fileList.forEach(item => {
+          
+        this.imgs+=item.response.data+','
+        });
+      
+        console.log(this.imgs)
+      },
+      showForm(){
+         if(getUser().name===undefined){
+                this.$message({
+                    message:'必须登陆才可以分享哦~',
+                    type:"warning"
+                })
+                return 
+            }else{
+              this.dialogFormVisible= true
+            }
+      },
+      save(){
+          this.pojo.imgs  = this.imgs
+          this.pojo.avatar = getUser().avatar
+          this.pojo.username = getUser().name
+          this.pojo.userid = getUser().token
+          shareApi.save(this.pojo).then(res=>{
+
+            this.$message({
+                    message: res.data.message,
+                    type: (res.data.flag?'success':'error')
+                })
+          })
+        
+          this.dialogFormVisible= false
+          this.pojo = {}
+      }
+    },
+  head () {
+    return {
+      title: this.title,
+      meta: [
+        { hid: 'description', name: 'description', content: 'My custom description' }
+      ]
+    }
+  }
 }
 </script>
+<style>
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 150px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+     background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+     background-color: #d3dce6;
+  }
+</style>

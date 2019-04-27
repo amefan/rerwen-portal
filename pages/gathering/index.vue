@@ -20,7 +20,7 @@
           <p>地址：{{item.address}}</p> 
          </div> 
          <div class="fr btn"> 
-          <span class="sui-btn btn-bao">立即报名</span> 
+          <a :href="'/gathering/item/'+item.id"><span class="sui-btn btn-bao">立即报名</span></a>
          </div> 
          <div class="clearfix"></div> 
         </div> 

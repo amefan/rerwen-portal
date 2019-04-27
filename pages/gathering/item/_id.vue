@@ -69,6 +69,9 @@
    <el-dialog title="报名信息" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="手机号码" :label-width="formLabelWidth">
+      <el-input v-model="form.nickname" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="手机号码" :label-width="formLabelWidth">
       <el-input v-model="form.phone" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="QQ" :label-width="formLabelWidth">
@@ -86,6 +89,7 @@
 import "~/assets/css/page-sj-activity-detail.css"
 import gatheringApi from '@/api/gathering'
 import usergathApi from '@/api/usergath'
+import {getUser} from '@/utils/auth'
 export default {
     async asyncData( {params} ){
        let {data} = await gatheringApi.findById(params.id);
@@ -106,8 +110,20 @@ export default {
     },
     methods:{
       submit(){
-        this.form.nickname = '小雅'
-        this.form.userid = '1111111111'
+       if(getUser().name===undefined){
+                this.$message({
+                    message:'必须登陆才可以报名哦~',
+                    type:"warning"
+                })
+                return 
+            }
+            if(this.form.qq===''||this.form.qq===''||this.form.nickname){
+                this.$message({
+                    message:'请填写完整报名信息哦~',
+                    type:"warning"
+                })
+                return 
+            }
         this.form.gathid = this.item.id
         usergathApi.save(this.form).then(res=>{
           console.log(res.data)

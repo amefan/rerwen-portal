@@ -10,21 +10,19 @@
     </div> 
     <div class="activity-list" v-infinite-scroll="loadMore"> 
      <ul class="activity"> 
-      <li class="activity-item" v-for="(item,index) in items" :key="index"> 
+      <li class="activity-item"  v-for="(item,index) in items" :key="index"> 
        <div class="activity-inner"> 
         <a href="http://"></a> 
-        <div class="img">
-         <a :href="'/gathering/item/'+item.id" target="_blank"><img :src="item.image" alt="" /></a>
-        </div> 
+      
         <div class="text"> 
-         <p class="title">{{item.name}}</p> 
-         <div class="fl goin"> 
-          <p>时间：{{item.starttime}}</p> 
-          <p>地址：{{item.address}}</p> 
-         </div> 
-         <div class="fr btn"> 
-          <span class="sui-btn btn-bao">立即报名</span> 
-         </div> 
+         <p class="title" style="color:#ff787e"><span style="color:#ff787e;font-family: fantasy;font-style: italic;">To: </span>  {{item.touser}}</p> 
+         <hr/>
+           <div v-text="item.content"></div>
+           <br> 
+          <p style="float: left;">{{item.publishtime}}</p> 
+           
+          <p style="color:#ff787e; font-size:16px;float:right"><span style="font-family: fantasy;font-style: italic;">From:</span> {{item.fromuser}}</p>
+        
          <div class="clearfix"></div> 
         </div> 
        </div> </li> 
@@ -42,36 +40,38 @@
   <el-input
     placeholder="ta的名字"
     suffix-icon="el-icon-d-arrow-left"
-    v-model="input1">
+    v-model="pojo.touser">
   </el-input>
       </div>
   <div class="demo-input-suffix">
     from：
   <el-input
-    placeholder="你的名字"
+    placeholder="你的名字,不填显示匿名用户"
     suffix-icon="el-icon-d-arrow-right"
-    v-model="input1">
+    v-model="pojo.fromuser">
   </el-input>
   </div>
   <br>
   <el-input
   type="textarea"
   :rows="3"
-  placeholder="请输入内容"
-  v-model="textarea">
+  placeholder="在这里写下想对ta说的话"
+  v-model="pojo.content">
 </el-input>
-<span class="sui-btn btn-block btn-share" style="background-color: #dd514c;"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 填好了,起飞!</span>     </div> 
+<span class="sui-btn btn-block btn-share" @click="submit" style="background-color: #dd514c;"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 填好了,起飞!</span>     </div> 
     </div> 
   </div>
 </template>
 <script>
 import '~/assets/css/page-sj-confession.css'
 import gatheringApi from '@/api/gathering'
+import confessionApi from '@/api/confession'
+import {getUser} from '@/utils/auth'
 export default {
 
     asyncData () {
       
-        return gatheringApi.search(1,12,{state:''})
+        return confessionApi.search(1,12,{})
         .then((res) => {
             //console.log(res.data.data)
         return { items: res.data.data.rows }
@@ -81,7 +81,9 @@ export default {
        return {
             pageNo: 1,
             title: '表白墙',
-           textarea:''
+            textarea:'',
+            pojo: {}
+
        } 
     },
     head(){
@@ -96,9 +98,39 @@ export default {
          loadMore(){
          
             this.pageNo++
-            gatheringApi.search(this.pageNo,12,{state:''}).then( res => {
+            confessionApi.search(this.pageNo,12,{}).then( res => {
             this.items = this.items.concat( res.data.data.rows )
         })
+         },
+         submit(){
+            if(getUser().name===undefined){
+                this.$message({
+                    message:'必须登陆才可以评论哦~',
+                    type:"warning"
+                })
+                return 
+            }
+            if(this.pojo.to===''||this.pojo.content===''){
+                this.$message({
+                    message:'请填写完整表白信息哦~',
+                    type:"warning"
+                })
+                return 
+            }
+            this.pojo.userid = getUser().token;
+            confessionApi.save(this.pojo).then(res=>{
+              this.$message({
+                    message: res.data.message,
+                    type: (res.data.flag?'success':'error')
+                })
+                if(res.data.flag){
+                  confessionApi.search(1,12,{}).then( res => {
+                  this.items = res.data.data.rows
+                  
+                })
+             }
+            })
+
          }
     }
 }

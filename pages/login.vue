@@ -101,6 +101,13 @@ export default {
           activeName: 'first',
           title: '登陆注册'
       }
+  },head () {
+    return {
+      title: this.title,
+      meta: [
+        { hid: 'description', name: 'description', content: 'My custom description' }
+      ]
+    }
   },
   methods:{
       handleClick(tab, event) {
@@ -154,14 +161,7 @@ export default {
             }
           })
       },
-      head(){
-        return {
-            title: this.title,
-            meta:[ { 
-                hid: 'description', name: 'description', content: 'My custom description'
-             }]
-        }
-      }
+      
 
   }
 }

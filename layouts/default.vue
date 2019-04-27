@@ -5,7 +5,7 @@
           <div class="wrapper">
             <div class="sui-navbar">
                 <div class="navbar-inner">
-                  <a href="index-logined.html" class="sui-brand"><img src="~/assets/img/logo.png" alt="社交"/></a>
+                  <a href="#" class="sui-brand"><img src="~/assets/img/logo.png" alt="社交"/></a>
                   <ul class="sui-nav">
                     <nuxt-link to="/" tag="li" active-class="active" exact><a>首页</a></nuxt-link>
                     <nuxt-link to="/gathering"  tag="li" active-class="active" ><a>活动</a></nuxt-link>
@@ -40,7 +40,7 @@
                         </ul>
                       </li>
                       <li><a href="~/assets/other-notice.html" class="notice">{{user.name}}</a></li>
-                      <li><a href="#" class="homego"><img :src="user.avatar" width="46px" height="50px" :alt="user.name"></a></li> 
+                      <li><a href="/user" class="homego"><img :src="user.avatar" width="46px" height="50px" :alt="user.name"></a></li> 
                       <li><a @click="logout" class="notice">退出登录</a></li>
                       </div> 
                       <div class="sui-nav pull-right info" v-if="user.name===undefined"> 
