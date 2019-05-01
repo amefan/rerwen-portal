@@ -41,6 +41,18 @@ export default {
             data: pojo
         })
         
+    },
+    GetOnline(){
+        return request({
+            url: `${host}/${api_name}/online`,
+            method: 'get',
+        })
+    },
+    getOne(id){
+        return request({
+            url: `${host}/${api_name}/${id}`,
+            method: 'get',
+        })
     }
 
 }

@@ -91,6 +91,8 @@
 import '~/assets/css/page-sj-person-loginsign.css'
 import userApi from '@/api/user'
 import {setUser} from '@/utils/auth'
+import SockJS from "sockjs-client"
+import Stomp from "stompjs"
 export default {
   data(){
       return{
@@ -99,7 +101,8 @@ export default {
           mobile: '',
           password: '',
           activeName: 'first',
-          title: '登陆注册'
+          title: '登陆注册',
+          loginname:''
       }
   },head () {
     return {
@@ -114,8 +117,8 @@ export default {
         console.log(tab, event);
       },
       sendsms(){
-          console.log(this.pojo.moblie)
-          userApi.sendsms(this.pojo.moblie).then(
+          console.log(this.pojo.mobile)
+          userApi.sendsms(this.pojo.mobile).then(
               res=>{
                  this.$message({
             message: res.data.message,
@@ -149,6 +152,9 @@ export default {
               console.log(res.data)
               if(res.data.flag){
               setUser(res.data.data.token,res.data.data.name,res.data.data.avatar)
+               this.loginname=res.data.data.name
+              this.connect();
+             
               location.href='/'
               
             }else{
@@ -161,7 +167,20 @@ export default {
             }
           })
       },
-      
+       connect(){         
+         let socket=new SockJS('http://localhost:9001/websocket')
+         this.stompClient = Stomp.over(socket)
+         this.stompClient.connect({"login":this.loginname }, this.onConnected);        
+      },
+      onConnected(frame) {
+           this.stompClient.subscribe('/user/topic/send',msg=>{
+               
+            let body= JSON.parse(msg.body) 
+            console.log(body+ "dsfsd")
+            this.info += "<br>"+body.date+body.fromUser+"  "+ body.message   
+           })
+           }
+           ,
 
   }
 }

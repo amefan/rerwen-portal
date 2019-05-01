@@ -11,7 +11,7 @@
                     <nuxt-link to="/gathering"  tag="li" active-class="active" ><a>活动</a></nuxt-link>
                     <nuxt-link to="/spit"  tag="li" active-class="active" ><a>吐槽</a></nuxt-link>
                     <nuxt-link to="/confession"  tag="li" active-class="active" ><a>表白墙</a></nuxt-link>
-                    <nuxt-link to="/friend"  tag="li" active-class="active" ><a>交友</a></nuxt-link>
+                    <nuxt-link to="/friend"  tag="li" active-class="active" ><a>交友聊天</a></nuxt-link>
                   </ul>
                   <form class="sui-form sui-form pull-left">
                     <input type="text" placeholder="输入关键词...">
