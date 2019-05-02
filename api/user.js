@@ -53,6 +53,12 @@ export default {
             url: `${host}/${api_name}/${id}`,
             method: 'get',
         })
+    },
+    checkmoile(phone){
+        return request({
+            url: `${host}/${api_name}/checkphone/${phone}`,
+            method: 'get',
+        })
     }
 
 }

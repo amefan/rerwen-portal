@@ -29,8 +29,8 @@
                         </ul>
                       </li> -->
                       <div class="sui-nav pull-right info" v-if="user.name!==undefined"> 
-                      <li><a href="~/assets/other-notice.html" target="_blank" class="notice">通知</a></li>
-                      <li class="hover">
+   <!-- <li><a href="~/assets/other-notice.html" target="_blank" class="notice">通知</a></li> -->
+                      <!-- <li class="hover">
                         <span class="fa fa-plus "></span>
                         <ul class="hoverinfo">
                           <li><i class="fa fa-share-alt" aria-hidden="true"></i> <a href="~/assets/headline-submit.html">去分享</a></li>
@@ -38,7 +38,7 @@
                           <li><i class="fa fa-comments" aria-hidden="true"></i><a href="~/assets/spit-submit.html" target="_blank">去吐槽</a></li>
                           <li><i class="fa fa-heartbeat" aria-hidden="true"></i> <a href="~/assets/makeFriends-submit.html" target="_blank">发约会</a></li>
                         </ul>
-                      </li>
+                      </li> -->
                       <li><a href="~/assets/other-notice.html" class="notice">{{user.name}}</a></li>
                       <li><a href="/user" class="homego"><img :src="user.avatar" width="46px" height="50px" :alt="user.name"></a></li> 
                       <li><a @click="logout" class="notice">退出登录</a></li>

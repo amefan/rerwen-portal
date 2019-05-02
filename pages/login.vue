@@ -59,7 +59,7 @@
           </div> 
          </div> 
         </div> 
-        <div id="a2" class="email"> 
+        <!-- <div id="a2" class="email"> 
          <div class="control-group inputemail"> 
           <input type="text" placeholder="输入手机号" class="input-xlarge" /> 
          </div> 
@@ -69,7 +69,7 @@
            <input style="height: 32px;border-radius: 5px" v-model="password" id="inputpassword" placeholder="请输入6-16位字符" class="input-xlarge" /> 
           </div> 
          </div> 
-        </div> 
+        </div>  -->
        </div> 
       </div> 
       <div class="control-group btn-signup"> 
@@ -118,7 +118,23 @@ export default {
       },
       sendsms(){
           console.log(this.pojo.mobile)
-          userApi.sendsms(this.pojo.mobile).then(
+           if(!(/^1[34578]\d{9}$/.test(this.pojo.mobile))){ 
+            this.$message({
+            message: '填写的手机号有误,请重填哦~',
+            type: 'error'
+            })
+               return 
+           } 
+          userApi.checkmoile(this.pojo.mobile).then(res=>{
+              if(res.data.flag){
+                  this.$message({
+            message: '手机号已经被使用~',
+            type: 'error'
+            })
+            return
+              }
+
+              userApi.sendsms(this.pojo.mobile).then(
               res=>{
                  this.$message({
             message: res.data.message,
@@ -126,10 +142,19 @@ export default {
           })
               }
           )
+          })
+          
       },
 
       register(){
           console.log(this.pojo)
+          if(this.pojo.nickname===''||this.pojo.password===''||this.pojo.mobile===''||this.code===''||this.pojo.nickname===undefined||this.pojo.password===undefined||this.pojo.mobile===undefined||this.code===undefined){
+              this.$message({
+                          message: '请填写完整注册信息哦~',
+                          type: 'warning'
+                      })
+                      return
+          }
           userApi.register(this.pojo,this.code).then(res=>{
                   if(res.data.flag){
                       this.$message({

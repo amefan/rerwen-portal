@@ -68,7 +68,7 @@
    <!-- 报名对话框 -->
    <el-dialog title="报名信息" :visible.sync="dialogFormVisible">
   <el-form :model="form">
-    <el-form-item label="手机号码" :label-width="formLabelWidth">
+    <el-form-item label="姓名" :label-width="formLabelWidth">
       <el-input v-model="form.nickname" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="手机号码" :label-width="formLabelWidth">
@@ -117,7 +117,7 @@ export default {
                 })
                 return 
             }
-            if(this.form.qq===''||this.form.qq===''||this.form.nickname){
+            if(this.form.qq===undefined||this.form.phone===undefined||this.form.nickname===undefined){
                 this.$message({
                     message:'请填写完整报名信息哦~',
                     type:"warning"
