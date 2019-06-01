@@ -3,7 +3,10 @@
    <h1>{{item.name}}</h1> 
    <div class="img-text"> 
     <div class="left-img"> 
-     <img :src="item.image" alt="" /> 
+     <img :src="item.image" alt="" style="
+    width: 320px;
+    height: 260px;
+"/> 
     </div> 
     <div class="right-txt"> 
      <p>开始时间： {{item.starttime}}</p> 
@@ -133,6 +136,7 @@ export default {
           })
         })
         this.dialogFormVisible = false
+        this.count++;
       },
       getcount(){
          usergathApi.countByGathid(this.item.id).then(res=>{

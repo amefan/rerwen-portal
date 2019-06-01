@@ -30,13 +30,14 @@ import userApi from '@/api/user'
 export default {
     asyncData () {
         return userApi.GetOnline().then((res) => {
-            //console.log(res.data.data)
+            console.log(res.data.data)
         return { list: res.data.data }
         })
     },
     data(){
         title:'聊天交友'
-    },head () {
+    },
+    head () {
     return {
       title: this.title,
       meta: [

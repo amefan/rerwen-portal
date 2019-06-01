@@ -24,7 +24,7 @@
 </template>
 <script>
 import spitApi from '@/api/spit'
-
+import {getUser} from '@/utils/auth'
 import {quillRedefine} from 'vue-quill-editor-upload'
 import '~/assets/css/page-sj-spit-submit.css'
   export default {
@@ -32,6 +32,7 @@ import '~/assets/css/page-sj-spit-submit.css'
       return {
         content: '',
         title: '发布吐槽',
+        pojo:{},
         editorOption:{},//修改此处！
         /*editorOption: {}{
           // some quill options
@@ -94,7 +95,10 @@ import '~/assets/css/page-sj-spit-submit.css'
         this.content = html
       },
       save(){
-          spitApi.save({content:this.content}).then(res=>{
+          this.pojo.content = this.content
+          this.pojo.userid = getUser().token 
+          this.pojo.nickname = getUser().name
+          spitApi.save(this.pojo).then(res=>{
               this.$message({
                   message: res.data.message,
                   type: res.data.flag? 'success':'error'

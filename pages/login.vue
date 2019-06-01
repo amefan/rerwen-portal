@@ -15,11 +15,11 @@
       <div class="control-group"> 
        <label for="inputpassword" class="control-label">密码：</label> 
        <div class="controls"> 
-        <input type="password" v-model="password" style="height: 32px;border-radius: 5px" id="inputpassword" placeholder="输入登录密码" class="input-xlarge" /> 
+        <input type="password" v-model="password" style="height: 32px;border-radius: 5px;width: 353px;" id="inputpassword" placeholder="输入登录密码" class="input-xlarge" /> 
        </div> 
       </div> 
       <div class="controls"> 
-       <label> <input type="checkbox" name="remember-me" /><span class="type-text" style="font-size:12px;">记住登录状态</span> </label> 
+       <!-- <label> <input type="checkbox" name="remember-me" /><span class="type-text" style="font-size:12px;">记住登录状态</span> </label>  -->
        <button type="button" class="sui-btn btn-danger btn-yes" @click="login">登 录</button> 
       </div> 
       <div class="other-methods"> 
@@ -55,7 +55,7 @@
          <div class="control-group"> 
           <label for="inputpassword" class="control-label">密码</label> 
           <div class="controls"> 
-           <input type="password" style="height: 32px;border-radius: 5px" v-model="pojo.password" id="inputpassword" placeholder="请输入6-16位密码" class="input-xlarge" /> 
+           <input type="password" style="height: 32px;border-radius: 5px;width: 353px;  " v-model="pojo.password" id="inputpassword" placeholder="请输入6-16位密码" class="input-xlarge" /> 
           </div> 
          </div> 
         </div> 
@@ -75,8 +75,10 @@
       <div class="control-group btn-signup"> 
        <label class="control-label"></label> 
        <div class="controls"> 
-        <label> <input type="checkbox" /><span class="type-text" style="font-size:12px;">同意协议并接受《服务条款》</span> </label> 
-        <button type="button" class="sui-btn btn-danger btn-yes" @click="register">注 册</button> 
+        <!-- <label> <input type="checkbox" /><span class="type-text" style="font-size:12px;">同意协议并接受《服务条款》</span> </label>  -->
+        <button type="button" class="sui-btn btn-danger btn-yes" @click="register" style="
+    margin-left: 255px;
+">注 册</button> 
        </div> 
       </div> 
      </form> 
@@ -178,8 +180,11 @@ export default {
               if(res.data.flag){
               setUser(res.data.data.token,res.data.data.name,res.data.data.avatar)
                this.loginname=res.data.data.name
-              this.connect();
-             
+               this.connect();
+               this.$message({
+                          message: '登录成功',
+                          type: 'success'
+                      })
               location.href='/'
               
             }else{

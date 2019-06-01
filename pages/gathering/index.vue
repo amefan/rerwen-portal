@@ -11,7 +11,10 @@
        <div class="activity-inner"> 
         <a href="http://"></a> 
         <div class="img">
-         <a :href="'/gathering/item/'+item.id" target="_blank"><img :src="item.image" alt="" /></a>
+         <a :href="'/gathering/item/'+item.id" target="_blank"><img :src="item.image" alt="" style="
+    width: 277px;
+    height: 221px;
+"/></a>
         </div> 
         <div class="text"> 
          <p class="title">{{item.name}}</p> 

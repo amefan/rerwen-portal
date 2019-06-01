@@ -49,5 +49,14 @@ export default {
       url: `${host}/${api_name}/examine/${id}`,
       method : 'put'
     })
+  },
+  thumbup(id,token){
+    return request({
+      url: `${host}/${api_name}/thumbup/${id}`,
+      method: 'put',
+      data:{
+        token
+      }
+    })
   }
 }

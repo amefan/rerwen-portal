@@ -17,13 +17,13 @@
     </div>  -->
     <div class="right-content"> 
      <div class="fl middle" style="margin-left: -100px;width: 710px;"> 
-      <div class="carousel"> 
+      <!-- <div class="carousel"> 
        <el-carousel trigger="click" height="150px">
       <el-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
-      </div> 
+      </div>  -->
       <div class="data-list"> 
        <ul class="headline fixed" id="headline"> 
         <li class="headline-item" v-for="(item,index) in sharelist" :key="index"> 
@@ -33,19 +33,22 @@
          <div class="words"> 
           <h5 class="author"> 
            <div class="fl"> 
-            <span class="authorName" style="font-size: 17px"> <img :src="item.avater" style="width:45px; height:45px;" alt="" /> <span>{{item.username}}</span> </span> 
+            <span class="authorName" style="font-size: 17px"> <a :href="'/user/item/'+item.userid"><img :src="item.avater" style="width:45px; height:45px;" alt="" /> </a><span>{{item.username}}</span> </span> 
             <span>{{item.publishtime}}</span> 
            </div> 
          
            <div class="clearfix"></div> </h5> 
-         </div> <p class="content">{{item.content}}</p> 
+         </div> <p class="content"   style="font-size: initial;">{{item.content}}</p> 
          
          <div class="wrapper activities" style="width: 685px">
                <div class="activity-card-list">
                  <div class="activity-list" > 
                <ul class="activity" style="width: 710px"> 
                <li class="activity-item" style="width:210px" v-for="(img,index1) in item.imgs" :key="index1">
-                  <img :src="img" alt="" />
+                  <img :src="img" alt="" style="
+    width: 210px;
+    height: 168px;
+"/>
                </li>
                
                </ul>
@@ -57,9 +60,9 @@
         
          <div class="item_footer" >
             <div class="fr remark">
-             <a href="#" data-toggle="modal" data-target="#shareModal" class="share" style="color:#a5a6a5">  <i :class="'fa fa-thumbs-o-up '" aria-hidden="true"></i>点赞数:60</a>
-            <a href="#" data-toggle="modal" data-target="#shareModal" class="share" style="color:#a5a6a5"><i class="fa fa-eye" aria-hidden="true"></i> 浏览数:50</a> 
-            <a href="#" data-toggle="modal" data-target="#remarkModal" class="comment" style="color:#a5a6a5"><i class="fa fa-commenting" aria-hidden="true"></i> 评论数:50</a> 
+             <a  @click="thumbups(index)" data-toggle="modal" data-target="#shareModal" class="share" style="color:#a5a6a5">  <i :class="'fa fa-thumbs-o-up '" aria-hidden="true"></i>点赞数:{{item.thumbup}}</a>
+            <a  data-toggle="modal" data-target="#shareModal" class="share" style="color:#a5a6a5"><i class="fa fa-eye" aria-hidden="true"></i> 浏览数:{{item.visits}}</a> 
+            <a  data-toggle="modal" data-target="#remarkModal" class="comment" style="color:#a5a6a5"><i class="fa fa-commenting" aria-hidden="true"></i> 评论数:{{item.comment}}</a> 
            </div> 
          </div>
          <hr>
@@ -117,9 +120,9 @@
       
       <div class="block-btn"> 
        <p>今天，有什么好东西要和大家分享么?</p> 
-       <span class="sui-btn btn-block btn-share" @click="showForm" target="_blank">发布分享</span> 
+       <span class="sui-btn btn-block btn-share" @click="showForm" target="_blank">发布</span> 
       </div> 
-     
+<!--      
       <div class="activity"> 
        <div class="acti">
         <img src="~/assets/img/widget-activity01.png" alt="活动一" />
@@ -127,7 +130,7 @@
        <div class="acti">
         <img src="~/assets/img/widget-activity02.png" alt="活动一" />
        </div> 
-      </div> 
+      </div>  -->
     
       <!-- <link rel="import" href=".~/assets/.~/assets/modules/ui-modules/footer/footer.html?__inline"> --> 
      </div> 
@@ -305,7 +308,36 @@ export default{
         
           this.dialogFormVisible= false
           this.pojo = {}
-      }
+      },
+       thumbups(index){
+         console.log(this.sharelist[index])
+            if(getUser().name===undefined){
+                this.$message({
+                    message:'必须登陆才可以点赞哦~',
+                    type:"warning"
+                })
+                return 
+            }
+            if( this.sharelist[index].zan==='color'){
+                this.$message({
+                    message:'不可以重复点赞哦~',
+                    type:"warning"
+                })
+                return 
+            }
+            
+            return shareApi.thumbup(this.sharelist[index].id,getUser().token).then(res=> {
+                if(res.data.flag){
+                    this.sharelist[index].zan='color'
+                   this.sharelist[index].thumbup++
+                }else{
+                     this.$message({
+                    message:'不可以重复点赞哦~',
+                    type:"warning"
+                })
+                }
+            })
+        }
     },
   head () {
     return {
